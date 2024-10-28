@@ -1,0 +1,24 @@
+.container{
+    width: auto;
+    height: 200px;
+    background-color: orange;
+}
+
+.d-inline-block{
+    display: inline-block;
+    width: 200px;
+    height: 100px;
+    margin-right: 30px;
+}
+
+.d-inline-block:first-child{
+    background-color: skyblue;
+}
+
+.d-inline-block:nth-child(2){
+    background-color: green;
+}
+
+.d-inline-block:last-child{
+    background-color: red;
+}

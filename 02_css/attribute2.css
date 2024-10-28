@@ -1,0 +1,41 @@
+.d-block{
+    display: block;
+    background-color: rgb(231, 211, 207);
+    border: 1px solid gray;
+    width: 100px;
+    height: 30px;
+    font-size: 20px;
+
+    /* 여백 적용-> padding: 내부여백 / margin: 외부여백 */
+    padding: 10px;
+    /* block에서는 margin이 위아래로 겹치는 부분은 상쇄된다. */
+    margin: 10px;
+}
+
+.d-inline{
+    display: inline;
+    background-color: aquamarine;
+    border: 1px solid gray;
+
+    /* inline에는 가로, 세로 적용 안됨 */
+    width: 100px;
+    height: 100px;
+
+    /* 여백 적용 */
+    /* padding 위아래 배경색에만 적용됨 */
+    padding: 10px;
+    margin: 10px;
+}
+
+.d-inline-block{
+    display: inline-block;
+    background-color: blanchedalmond;
+    border: 1px solid gray;
+    width: 100px;
+    height: 100px;
+
+    /* 여백 적용 */
+    padding: 10px;
+    /* inline-block에서는 margin이 위아래로 상쇄되지 않는다. */
+    margin: 10px;
+}
