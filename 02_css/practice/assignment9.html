@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>background실습</title>
+    <style>
+        .background{
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: linear-gradient(#FFE600, #FF0080, #DB20DB);
+            position: relative;
+        }
+
+        .pic{
+            width: 450px;
+            height: 450px;
+            background-color: yellow;
+            background-image: url(./pic.png);
+            background-size: cover;
+            background-position: center;
+            position: absolute;
+            border-radius: 50%;
+            overflow: hidden;
+            background-size: cover;
+            background-position:center;
+            border: 10px solid white;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+<body>
+    <div class="background">
+        <div class="pic"></div>
+    </div>
+</body>
+</html>
