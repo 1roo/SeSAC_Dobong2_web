@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>transitioin-이미지 연달아 나열하기</title>
+    <style>
+        .container{
+            background-color: aliceblue;
+            width: 1000px;
+            height: 600px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        img {
+            position: relative;
+            cursor: pointer;
+            transform: skewY(25deg);
+            transition: ease-in-out;
+            width: 300px;
+            height: 200px;
+        }
+        img:hover {
+            transform: skew(0);
+            z-index: 5;
+        }
+        .beach1 {
+            left: 100px;
+            z-index: 3;
+        }
+        .beach2 {
+            z-index: 2;
+        }
+        .beach3 {
+            left: -100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img class="beach1" src="./beach1.jpg" alt="beach1">
+        <img class="beach2" src="./beach2.jpg" alt="beach2">
+        <img class="beach3" src="./beach3.jpg" alt="beach3">
+    </div>
+</body>
+</html>
