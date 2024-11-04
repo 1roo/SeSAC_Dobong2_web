@@ -125,4 +125,187 @@ console.log(typeof [true]) //object
 console.log(typeof null) //object
 console.log(typeof und) //undefined
 console.log(typeof NaN) //number
-console.log(typeof function(){})
+console.log(typeof function(){}) //function
+
+
+// "number" isn't "string" data type.
+console.log(`"${typeof 3}" isn't "${typeof ""}" data type.`);
+console.log('"' + typeof 3 + '"' + ' isn\'t ' + '"' + typeof "" + '"' + " data type.");
+
+// typeof를 array나 null에 사용하면, "object" 결과를 얻을 수 있습니다.
+console.log('typeof를 array나 null에 사용하면, "' + typeof null + '" 결과를 얻을 수 있습니다.');
+
+
+console.log('---------------------------------------');
+// 형변환
+// 1. ?? >> string
+let str1 = true;
+let str2 = 3;
+let str3 = null;
+console.log(typeof String(str1));
+console.log(typeof String(str2));
+console.log(typeof String(str3));
+console.log(typeof str1.toString());
+
+// 2. ?? >> number
+let n1 = true;
+let n1_1 = false;
+let n2 = "123";
+let n3 = "123.5"
+console.log(typeof Number(n1)); // true > 1
+console.log(typeof Number(n1_1)); // false > 0
+console.log(typeof Number(n2));
+console.log(typeof Number(n3));
+console.log(parseInt(n2));
+console.log(parseInt(n3)); // "123.5" > 123 (소수점 버려짐)
+console.log(parseInt(3.14));
+
+let english = prompt("영어 점수를 입력하세요.");
+let math = prompt("수학 점수를 입력하세요.");
+
+english = Number(english);
+math = Number(math);
+
+let average = (english + math) / 2;
+console.log(average);
+
+
+// 변수
+// 1. var - 재할당, 재선언 모두 가능
+var name = '홍길동';
+name = 'gildong'; // 재할당 가능
+var name = '춘향이'; // 재선언 가능
+// 재선언 가능한 것이 장점 같을 수는 있으나 협업과 유지보수에 힘들다.
+
+console.log('--------------------------------------');
+
+
+// 2. let - 재할당 가능, 재선언 불가
+let c; // 선언과 값의 초기화를 동시에 하지 않아도 됨.
+console.log(c); //undefined
+c = 1; // 재할당 가능
+c = 10;
+c = 15;
+console.log(c);
+// let c = 123; 재선언 불가능
+
+// 3. const - 재할당, 재선언 불가
+// const b; 선언과 동시에 초기화 되어야 함
+const b = 3;
+// const b = 5; 재선언 불가능
+// b = 5; 재할당 불가능
+
+let q1 = 3;
+q1 - 2;
+console.log(q1); // 3
+
+let q2 = 10;
+q2 = q2 + 10; // 20
+q2 = q2 - 5; // 15
+console.log(q2);
+
+console.log('--- 연산자 ---');
+
+/*
+ * 연산자
+ * 대입 연산자 =
+ * 비교 연산자 == === != !== > >= < <=
+ * 산술 연산자 + - * / % **
+ * 논리 연산자 ! && ||
+*/
+
+// 비교연산자
+// 비교연산자의 결과값은 true나 false
+// == === != !== > >= < <=
+console.log(1 == 1); //true
+console.log(1 == 2); //false
+console.log(1 != 1); //false
+console.log(1 != 2); //true
+console.log(1 == '1'); //true
+console.log(1 != '1'); //false
+console.log(1 == '2'); //false
+
+console.log('--- (=== 비교) ---');
+
+console.log(1 === 1); //true
+console.log(1 === 2); //false
+console.log(1 !== 1); //false
+console.log(1 !== 2); //true
+console.log(1 === '1'); //false
+console.log(1 !== '1'); //true
+console.log(1 === '2'); //false
+
+console.log('--- (크기 비교) ---');
+console.log(2 > 1); //true
+console.log(2 >= 1); //true
+console.log(2 < 1); //false
+console.log(2 <= 1); //false
+
+
+// 산술연산자
+console.log('--- (산술연산자) ---');
+console.log(1 + 2);
+console.log(1 - 2);
+console.log(1 * 2);
+console.log(1 / 2);
+// 나머지 연산자
+console.log(8 % 5);
+// 거듭제곱 연산자
+console.log(2 ** 5);
+
+
+// 논리연산자 (! && ||)
+console.log(true);
+console.log(false);
+console.log(!true); // false
+console.log(!false); // true
+console.log(!!false); // false
+console.log(true && true); // true
+console.log(true && false); // false
+console.log(false && true); // false
+console.log(false && false); // false
+console.log(true || true); // true
+console.log(false || true); // true
+console.log(true || false); // true
+console.log(false || false); // false
+
+
+console.log(!(2 > 1)); // false
+console.log(2 > 1 && -2 < 1); // true
+console.log((2 > 1 && 0 > -2) || 5 < 2); // true
+
+console.log('--------------------------------------');
+
+// == 연산자를 이용
+console.log("0" == false); // true
+console.log("0" == 0); // true
+console.log("" == 0); // true
+console.log(undefined == null); // true
+console.log(0 == false); // true
+
+console.log("" == "0"); // false
+console.log(false == undefined); // false
+console.log(false == null); // false
+
+console.log('--------------------------------------');
+
+console.log("0" === false); // false
+console.log("0" === 0); // false
+console.log("" === 0); // false
+console.log(undefined === null); // false
+console.log(0 === false); // false
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
