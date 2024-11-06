@@ -69,3 +69,52 @@ for(let i = 0; i <= 20; i+=2) {
     sum4 += i;
 }
 console.log(sum4);
+
+let sum5 = 0;
+// 홀수의 합을 구하기
+for(let i = 0; i < 10; i++) {
+    // if(i % 2 == 1) sum5 += i;
+    if(i % 2 === 0) continue; // 다음 반복으로 넘어가도록
+    sum5 += i;
+}
+console.log(sum5);
+
+
+/* while문 */
+let n1 = 1;
+while(n1 <= 5) {
+    console.log(n1);
+    n1++;
+}
+
+let n2 = 9;
+while(n2 >= 5) {
+    console.log(n2);
+    n2--;
+}
+
+// while문 사용해서 10부터 1까지 홀수만 출력
+let odd = 10;
+while(odd >= 1) {
+    if(odd % 2 === 1) {
+        console.log(odd);
+    }
+    odd--;
+}
+
+let a = 0;
+// 무한루프에 빠지지 않도록 조심. 무조건 참인 조건을 걸 때는 break를 꼭 써주자.
+while(true) {
+    console.log(a);
+    a++;
+    if(a > 10) {
+        break;
+    }
+}
+
+let a2 = 0;
+while(confirm("계속 진행하시겠습니까?")) {
+    //확인 > true, 취소 > false
+    a2++;
+    alert(`${a2}번째 alert 창`);
+}
