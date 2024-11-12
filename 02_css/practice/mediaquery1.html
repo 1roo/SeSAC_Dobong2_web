@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>크기에 따라 자리 바꾸기</title>
+</head>
+<!-- fontawesome CDN -->
+<script src="https://kit.fontawesome.com/837ff3adc1.js" crossorigin="anonymous"></script>
+<style>
+    body{
+        display: flex;
+    }
+    div{
+        border: 1px solid red;
+        background-color: black;
+        border-radius: 10px;
+        width: 100px;
+        height: 100px;
+        margin: 10px;
+    }
+
+    @media screen and (max-width: 700px) {
+        body{
+            flex-direction: column;
+        }
+        div {
+            background-color: skyblue;
+        }
+    }
+</style>
+<body>
+    <div></div>
+    <div></div>
+    <div></div>
+</body>
+</html>

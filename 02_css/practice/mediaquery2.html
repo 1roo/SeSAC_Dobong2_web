@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>header 만들기</title>
+</head>
+<!-- fontawesome CDN -->
+<script src="https://kit.fontawesome.com/837ff3adc1.js" crossorigin="anonymous"></script>
+<style>
+    header {
+        background-color: skyblue;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        height: 50px;
+        position: relative;
+    }
+    header .igloo {
+        color: white;
+        position: absolute;
+        left: 150px;
+    }
+
+    header .bars {
+        display: none;
+    }
+
+    header nav span {
+        margin: 0 10px;
+    }
+   
+    div {
+        height: 300px;
+        border: 1px solid gray;
+    }
+   
+    @media screen and (max-width: 786px) {
+    header nav {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 50px;
+        width: 100%;
+        background-color: rgb(186, 227, 243);
+    }
+
+    header nav span {
+        display: inline-block;
+        width: 100%;
+        text-align: center;
+        margin: 0;
+    }
+
+    header span:hover {
+        cursor: pointer;
+        background-color: black;
+        color: rgb(186, 227, 243);
+    }
+
+    header .igloo {
+        position: relative;
+        left: 0;
+        margin-right: 0 auto;
+        scale: 1.6;
+    }
+
+    header .bars {
+        display: inline-block;
+        position: absolute;
+        right: 15px;
+    }
+}
+
+      
+
+</style>
+<body>
+    
+    <header>
+        <i class="igloo fa-solid fa-igloo"></i>
+        <i class="bars fa-solid fa-bars"></i>
+        <nav>
+            <span>메뉴 1</span>
+            <span>메뉴 2</span>
+            <span>메뉴 3</span>
+            <span>메뉴 4</span>
+        </nav>
+    </header>
+    <div></div>
+</body>
+</html>
