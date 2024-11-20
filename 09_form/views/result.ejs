@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>form 제출 결과</title>
+    <style>
+      span {
+        color: coral;
+        font-weight: 700;
+      }
+    </style>
+  </head>
+  <body>
+    <h1><%=title%> 폼 결과 확인하기</h1>
+    <p>
+      <span>
+        <%=userInfo.id%><%= userInfo.email ? '(' + userInfo.email + ')' : '' %> </span
+      >님 환영합니다.
+    </p>
+    <p>비번은 <span><%=userInfo.pw%></span>군요</p>
+    <a href="/">홈으로 이동</a>
+  </body>
+</html>
