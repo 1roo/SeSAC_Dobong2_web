@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>동적 폼(ajax, axios, fetch)</title>
+
+    <!-- jQuery CDN -->
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"></script>
+
+    <!-- axios CDN -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <style>
+      .result {
+        font-size: 24px;
+        font-weight: 700;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>동적 폼 전송 연습하기</h1>
+    <form name="register">
+      <label for="name">이름: </label>
+      <input type="text" name="name" id="name" required />
+      <br />
+
+      <span>성별</span>
+      <input type="radio" id="male" name="gender" value="남성" required />
+      <label for="male">남자</label>
+      <input type="radio" id="female" name="gender" value="여성" />
+      <label for="female">여자</label>
+      <br /><br />
+
+      <button type="button" onclick="ajaxGet()">Ajax GET 제출</button>
+      <button type="button" onclick="ajaxPost()">Ajax POST 제출</button>
+      <br />
+      <button type="button" onclick="axiosGet()">axios GET 제출</button>
+      <button type="button" onclick="axiosPost()">axios POST 제출</button>
+      <br />
+      <button type="button" onclick="fetchGet()">fetch GET 제출</button>
+      <button type="button" onclick="fetchPost()">fetch POST 제출</button>
+    </form>
+    <div class="result"></div>
+    <script>
+      const resultBox = document.querySelector(".result");
+
+      function ajaxGet() {
+        const form = document.forms["register"]; // 폼 선택(form의 이름이 register)
+
+        // button type=button에서는 required 동작X
+        // 유효성 검증 하기.
+        if (form.name.value.trim() === "") {
+          alert("이름을 입력하세요.");
+          return;
+        }
+        if (form.gender.value === "") {
+          alert("성별을 선택하세요");
+          return;
+        }
+
+        // -------- ajax 요청 --------
+        // 보낼 데이터 객체형으로 만들기
+        const data = {
+          name: form.name.value, // 입력받은 이름
+          gender: form.gender.value, // 남성 or 여성
+        };
+
+        /* ajax 사용 */
+        $.ajax({
+          type: "get", // 메소드(get, post, put, delete ...)
+          url: "/ajax", // form의 action에 해당하는 주소
+          data: data, // 서버로 넘겨줄 데이터
+
+          // 통신이 성공했을 때
+          success: function (res) {
+            // 통신 이후에 일어날 일들...
+            console.log(res);
+            resultBox.textContent = `GET /ajax 요청 완료 ${res.name}의 성별은 ${res.gender}`;
+          },
+          // 통신이 실패했을 때
+          error: function (err) {
+            console.log("error: ", err);
+          },
+        });
+      }
+
+      function ajaxPost() {
+        const form = document.forms["register"];
+        const data = {
+          name: form.name.value,
+          gender: form.gender.value,
+        };
+
+        $.ajax({
+          type: "post",
+          url: "/ajax",
+          data: data,
+          success: function (data) {
+            console.log(data);
+            resultBox.textContent = `POST /ajax 요청 완료 ${data.name}의 성별은 ${data.gender}입니다.`;
+          },
+          error: function (err) {
+            console.log("err: ", err);
+          },
+        });
+      }
+
+      async function axiosGet() {
+        const form = document.forms["register"];
+        const data = {
+          name: form.name.value,
+          gender: form.gender.value,
+        };
+
+        // 유효성 검사 - checkValidity()
+        // required가 있으면 기입 여부 검사 함수.
+        /*
+        - required 속성이 없는 항목 > 무조건 true 반환
+        - required 속성이 있는 항목
+           > 기입: true / 기입X: false 반환
+        */
+        console.log(form.name.checkValidity()); // form.name = input[name="name"]
+        console.log(form.gender[0].checkValidity()); //남성[0] 여성[1] 둘 중 하나만 적어도 둘 다 검사
+
+        if (!form.name.checkValidity()) {
+          //   resultBox.innerText = "이름을 입력하세요";
+          resultBox.innerText = form.name.validationMessage; // 이 입력란을 작성하세요.
+          return;
+        }
+        if (!form.gender[0].checkValidity()) {
+          //   resultBox.innerText = "성별을 선택하세요";
+          resultBox.innerText = form.gender[0].validationMessage; // 다음 옵션 중 하나를 선택하세요.
+          return;
+        }
+
+        // -------- axios 요청 보내기 --------
+        //1. then ~ catch 사용
+        //   axios({
+        //     method: "get",
+        //     url: "/axios",
+        //     params: data, // get요청은 params에 담아 요청
+        //   })
+        //     .then(function (response) {
+        //       // 통신 성공
+        //       console.log(response); // 객체 형태
+        //       console.log(response.data); // 서버에서 준 데이터
+        //       console.log(response.status); // 상태 코드
+
+        //       resultBox.textContent = `GET /axios요청 완료 ${response.data.name}의 성별은 ${response.data.gender}`;
+        //       resultBox.style.color = "green";
+        //     })
+        //     .catch((err) => {
+        //       // 통신 에러
+        //       console.error("에러다 에러다");
+        //       console.error("error: ", err);
+        //     });
+
+        // 2. async ~ await 사용
+        // 에러 처리를 try ~ catch 문을 사용해서 해주는게 좋다.
+        try {
+          const response = await axios({
+            method: "get",
+            url: `/axios?name=${data.name}&${data.gender}`,
+          });
+          console.log(response.data);
+          const { name, gender } = response.data;
+          resultBox.textContent = `${name}의 성별은 ${gender}`;
+          resultBox.style.color = "green";
+        } catch (err) {
+          console.error(err);
+        }
+      }
+
+      async function axiosPost() {
+        const form = document.forms["register"];
+        const data = {
+          name: form.name.value,
+          gender: form.gender.value,
+        };
+        try {
+          const res = await axios({
+            method: "post",
+            url: "/axios",
+            data: data,
+          });
+          console.log("실제 데이터: ", res.data);
+          const { name: 이름, gender: 성 } = res.data;
+          resultBox.textContent = `${이름}의 성별은 ${성}`;
+        } catch (err) {
+          console.error(err);
+        }
+      }
+
+      function fetchGet() {
+        const form = document.forms["register"];
+        const data = {
+          name: form.name.value,
+          gender: form.gender.value,
+        };
+
+        // fetch("/fetch", {
+        //   method: "get",
+        // });
+
+        // fetch의 default method는 'GET'
+        fetch(`/fetch?name=${data.name}&gender=${data.gender}`)
+          .then((res) => {
+            console.log(res);
+
+            // res.send(req.query); 클라이언트에서 제이슨 사용. 서버에서 넘어온 객체를 뽑아내기 위해 json() 사용
+            // return res.json();
+
+            // res.send('응답완료'); 클라이언트에서 문자열 사용. 서버에서 넘어온 문자열을 뽑아내기 위해 text() 사용
+            return res.text();
+          })
+          .then((result) => {
+            console.log(result);
+            resultBox.textContent = `${result.name}은 ${result.gender}`;
+            resultBox.style.color = "pink";
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      }
+
+      async function fetchPost() {
+        const form = document.forms["register"];
+        const data = {
+          name: form.name.value,
+          gender: form.gender.value,
+        };
+        try {
+          const res = await fetch("/fetch", {
+            method: "post",
+            // data는 JSON형식(문자열)으로 보내야 함.
+            body: JSON.stringify(data),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+          // json(), text() > 시간이 걸리는 작업.
+          const result = await res.json();
+          console.log(result);
+          const { name, gender } = result;
+          resultBox.textContent = `${name}은 ${gender}`;
+          resultBox.style.color = "skyblue";
+        } catch (err) {
+          console.error(err);
+        }
+      }
+    </script>
+  </body>
+</html>
