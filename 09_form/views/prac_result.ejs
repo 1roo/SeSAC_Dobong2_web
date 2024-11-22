@@ -27,8 +27,16 @@
       <%=userInfo.birth_year%>/<%=userInfo.birth_month%>/<%=userInfo.birth_day%>
     </div>
     <div class="border">관심사: <%=userInfo.hobby%></div>
-    <div><%= title === 'POST' ? '좋아하는 색상: ' + userInfo.color : ''%></div>
+    <div class="color">
+      <%= title === 'POST' ? '좋아하는 색상: ' + userInfo.color : ''%>
+    </div>
     <div><%= title === 'POST' ? '좋아하는 숫자: ' + userInfo.num : '' %></div>
     <a href="/">홈으로 이동하기</a>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const color = document.querySelector(".color");
+        color.style.color = "<%=userInfo.color%>";
+      });
+    </script>
   </body>
 </html>
