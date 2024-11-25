@@ -33,7 +33,8 @@
         const p = document.querySelector("p");
 
         if (!inputId || !inputPw) {
-          alert("모든 필드를 올바르게 입력해주세요.");
+          // checkValidity()사용해서 해도 가능!
+          alert("아이디와 비밀번호는 필수입니다.");
           return;
         }
 
@@ -42,15 +43,37 @@
           inputPw,
         };
 
-        axios
-          .post("http://localhost:8080/prac2", data)
+        // axios
+        //   .post("http://localhost:8080/prac2", data)
+        //   .then((res) => {
+        //     if (res.data.isAuthenticated) {
+        //       p.textContent = `${inputId}님! 로그인 성공😊`;
+        //       p.style.color = "blue";
+        //       p.style.fontWeight = "bold";
+        //     } else {
+        //       p.textContent = "아이디 또는 패스워드 오류😒";
+        //       p.style.color = "red";
+        //       p.style.fontWeight = "bold";
+        //     }
+        //   })
+        //   .catch((error) => {
+        //     console.error(error);
+        //   });
+
+        axios({
+          url: "/prac2",
+          method: "post",
+          data: data,
+        })
           .then((res) => {
             if (res.data.isAuthenticated) {
               p.textContent = `${inputId}님! 로그인 성공😊`;
               p.style.color = "blue";
+              p.style.fontWeight = "bold";
             } else {
               p.textContent = "아이디 또는 패스워드 오류😒";
               p.style.color = "red";
+              p.style.fontWeight = "bold";
             }
           })
           .catch((error) => {

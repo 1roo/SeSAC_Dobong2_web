@@ -96,10 +96,6 @@ app.post("/prac2", (req, res) => {
   const isAuthenticated = inputId === realId && inputPw === realPw;
 
   const response = {
-    realId,
-    realPw,
-    inputId,
-    inputPw,
     isAuthenticated,
   };
   res.json(response);
