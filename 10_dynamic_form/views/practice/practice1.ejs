@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>실습1</title>
+    <!-- axios CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <h1>실습 1</h1>
+    <br />
+    <label> 이름: <input class="name" type="text" name="name" /> </label>
+    <fieldset>
+      <legend>성별</legend>
+      <label> <input type="radio" name="gender" value="남자" />남자</label>
+      <label> <input type="radio" name="gender" value="여자" />여자</label>
+    </fieldset>
+    <fieldset class="age">
+      <legend>생년월일</legend>
+      <label>
+        <select name="birth_year">
+          <% for(let i=1980; i<=2010; i++){ %>
+          <option value="<%=i%>"><%=i%></option>
+          <% } %></select
+        >년
+      </label>
+      <label>
+        <select name="birth_month">
+          <% for(let i=1; i<=12; i++){ %>
+          <option value="<%=i%>"><%=i%></option>
+          <% } %></select
+        >월
+      </label>
+      <label>
+        <select name="birth_day">
+          <% for(let i=1; i<=31; i++){ %>
+          <option value="<%=i%>"><%=i%></option>
+          <% } %></select
+        >일
+      </label>
+    </fieldset>
+    <fieldset>
+      <legend>관심사</legend>
+      <label> <input type="checkbox" name="hobby" value="여행" />여행</label>
+      <label> <input type="checkbox" name="hobby" value="패션" />패션</label>
+      <label> <input type="checkbox" name="hobby" value="음식" />음식</label>
+    </fieldset>
+    <button type="button" onclick="axiosGetSubmit()">제출(axios get)</button>
+    <p class="sayHello"></p>
+
+    <script>
+      function axiosGetSubmit() {
+        const nameInput = document.querySelector('input[name="name"]');
+        const genderInput = document.querySelector(
+          'input[name="gender"]:checked'
+        );
+        const birthYearSelect = document.querySelector(
+          'select[name="birth_year"]'
+        );
+        const birthMonthSelect = document.querySelector(
+          'select[name="birth_month"]'
+        );
+        const birthDaySelect = document.querySelector(
+          'select[name="birth_day"]'
+        );
+        const hobbyInputs = document.querySelectorAll(
+          'input[name="hobby"]:checked'
+        );
+
+        // form태그를 다 들고왔었다면~
+        // const favValue = [];
+        // form.favorite.forEach((input) => {
+        //   if (input.checked) favValue.push(input.value);
+        // });
+
+        if (
+          !nameInput ||
+          !genderInput ||
+          !birthYearSelect ||
+          !birthMonthSelect ||
+          !birthDaySelect
+        ) {
+          alert("모든 필드를 올바르게 입력해주세요.");
+          return;
+        }
+        const name = nameInput.value;
+        const gender = genderInput.value;
+        const birthYear = birthYearSelect.value;
+        const birthMonth = birthMonthSelect.value;
+        const birthDay = birthDaySelect.value;
+
+        const hobbies = Array.from(hobbyInputs).map((input) => input.value);
+
+        axios({
+          method: "get",
+          url: "http://localhost:8080/prac1",
+          params: {
+            name,
+            gender,
+            birth_year: birthYear,
+            birth_month: birthMonth,
+            birth_day: birthDay,
+            hobbies: hobbies.join(", "),
+          },
+        })
+          .then((res) => {
+            const result = res.data;
+            console.log(result);
+
+            document.querySelector(
+              ".sayHello"
+            ).innerHTML = `${result.name}님 환영합니다! 가입이 완료되었습니다. 🎈🎈 취미는 ${result.hobbies}
+          `;
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      }
+    </script>
+  </body>
+</html>

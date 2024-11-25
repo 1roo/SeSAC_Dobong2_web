@@ -11,6 +11,10 @@ app.set("views", "./views");
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
+// 실습2 전역변수
+const realId = "banana";
+const realPw = "4321";
+
 /* API */
 app.get("/", (req, res) => {
   res.render("index.ejs");
@@ -54,6 +58,51 @@ app.get("/fetch", (req, res) => {
 app.post("/fetch", (req, res) => {
   console.log(req.body);
   res.send(req.body);
+});
+
+// 외부 api 사용하기
+app.get("/api", (req, res) => {
+  res.render("api");
+});
+
+// 실습 1, 실습 2
+app.get("/practice1", (req, res) => {
+  res.render("practice/practice1.ejs");
+});
+
+app.get("/prac1", (req, res) => {
+  const { name, gender, birth_year, birth_month, birth_day, hobbies } =
+    req.query;
+
+  const response = {
+    name,
+    gender,
+    birth_year,
+    birth_month,
+    birth_day,
+    hobbies: hobbies || "없음",
+  };
+
+  res.json(response);
+});
+
+app.get("/practice2", (req, res) => {
+  res.render("practice/practice2.ejs");
+});
+
+app.post("/prac2", (req, res) => {
+  const { inputId, inputPw } = req.body;
+
+  const isAuthenticated = inputId === realId && inputPw === realPw;
+
+  const response = {
+    realId,
+    realPw,
+    inputId,
+    inputPw,
+    isAuthenticated,
+  };
+  res.json(response);
 });
 
 app.listen(PORT, () => {
