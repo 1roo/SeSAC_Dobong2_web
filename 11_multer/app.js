@@ -172,7 +172,9 @@ app.post(
 // 동적 form 파일 업로드
 app.post("/dynamicUpload", uploadDetail.single("dynamicFile"), (req, res) => {
   console.log(req.file);
-  res.send(req.file);
+  console.log(req.body);
+  res.send({ file: req.file, fileInfo: req.body });
+  // res.send({ ...req.file, ...req.body });
 });
 /*
 {

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>결과 페이지</title>
+    <style>
+      img {
+        border: 1px solid tomato;
+        margin-bottom: 10px;
+      }
+      .bigName {
+        color: skyblue;
+      }
+      .info {
+        width: 200px;
+        display: flex;
+        margin: 3px 0;
+      }
+      .info span {
+        width: 100px;
+        text-align: center;
+      }
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 500px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1><span class="bigName"><%=result.name%></span>님 마이페이지</h1>
+      <img src="<%=result.file%>" alt="프로필 사진" width="200" />
+      <div class="info">
+        <span>아이디</span>
+        <span class="id"><%=result.id%></span>
+      </div>
+      <div class="info">
+        <span>비밀번호</span>
+        <span class="pw"><%=result.password%></span>
+      </div>
+      <div class="info">
+        <span>이름</span>
+        <span class="name"><%=result.name%></span>
+      </div>
+      <div class="info">
+        <span>나이</span>
+        <span class="age"><%=result.age%></span>
+      </div>
+    </div>
+  </body>
+</html>

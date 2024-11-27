@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>실습</title>
+    <style>
+      form {
+        display: flex;
+        flex-direction: column;
+      }
+      label span {
+        display: inline-block;
+        width: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <form action="/register" method="post" enctype="multipart/form-data">
+      <label for="id"
+        ><span>아이디</span><input type="text" name="id" id="id"
+      /></label>
+      <label for="password"
+        ><span>비밀번호</span
+        ><input type="password" name="password" id="password"
+      /></label>
+      <label for="name"
+        ><span>이름</span><input type="text" name="name" id="name"
+      /></label>
+      <label for="age"
+        ><span>나이</span><input type="text" name="age" id="age"
+      /></label>
+      <label for="file"
+        ><span>프로필사진</span><input type="file" name="file" id="file"
+      /></label>
+      <div class="btns">
+        <button type="reset">리셋</button>
+        <button type="submit">회원가입</button>
+      </div>
+    </form>
+
+    <script></script>
+  </body>
+</html>
