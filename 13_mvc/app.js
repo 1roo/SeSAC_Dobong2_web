@@ -1,4 +1,3 @@
-const { render } = require("ejs");
 const express = require("express");
 const app = express();
 const PORT = 8080;
@@ -6,11 +5,19 @@ const PORT = 8080;
 app.set("view engine", "ejs");
 app.set("views", "./views");
 app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 
-app.use("/static", express.static(__dirname + "/public"));
+// 라우터 분리
+const indexRouter = require("./routes/index");
+app.use("/", indexRouter);
 
-app.get("/", (req, res) => {
-  res.render("index");
+const userRouter = require("./routes/user");
+app.use("/user", userRouter);
+
+// [404 error]
+// 반드시 맨 마지막 라우트로 선언
+app.get("*", (req, res) => {
+  res.render("404");
 });
 
 app.listen(PORT, () => {
