@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MVC 실습1</title>
+    <!-- axios CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+      .container {
+        width: 250px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>MVC실습 1</h1>
+    <div class="container">
+      <label> 아이디 <input class="id" type="text" name="id" /> </label>
+      <label>
+        비밀번호 <input class="password" type="password" name="password" />
+      </label>
+    </div>
+    <br />
+    <button type="button" onclick="login()">로그인</button>
+    <p></p>
+
+    <script>
+      function login() {
+        const inputId = document.querySelector(".id").value;
+        const inputPw = document.querySelector(".password").value;
+        const p = document.querySelector("p");
+
+        if (!inputId || !inputPw) {
+          alert("아이디와 비밀번호는 필수입니다.");
+          return;
+        }
+
+        const data = {
+          inputId,
+          inputPw,
+        };
+
+        axios({
+          url: "/login",
+          method: "post",
+          data: data,
+        })
+          .then((res) => {
+            console.log(res.data);
+            if (res.data.isAuthenticated) {
+              p.textContent = `${inputId}님! 로그인 성공😊`;
+              p.style.color = "blue";
+              p.style.fontWeight = "bold";
+            } else {
+              p.textContent = "아이디 또는 패스워드 오류😒";
+              p.style.color = "red";
+              p.style.fontWeight = "bold";
+            }
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      }
+    </script>
+  </body>
+</html>
