@@ -1,0 +1,11 @@
+@server = http://localhost:8080
+
+GET {{server}}/
+
+### post요청
+POST {{server}}/test
+Content-Type: application/json; charset=UTF-8;
+
+{
+    "name": "길동",
+}

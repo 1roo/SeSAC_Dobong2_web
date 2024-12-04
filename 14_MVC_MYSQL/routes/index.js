@@ -6,4 +6,12 @@ router.get("/", controller.main);
 
 router.get("/visitors", controller.getVisitors);
 
+router.get("/visitor/:id", controller.getVisiitor);
+
+router.post("/visitor", controller.postVisitor);
+
+router.delete("/visitor", controller.deleteVisitor);
+
+router.patch("/visitor", controller.patchVisitor);
+
 module.exports = router;
