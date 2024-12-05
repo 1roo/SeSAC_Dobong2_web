@@ -23,8 +23,7 @@
     <!-- TODO: href 속성값 설정하기 -->
     <a href="/user/signin">Register</a>
 
-    <!-- axios cdn -->
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    
     <script>
       // TODO: [Login] 버튼 클릭시 서버에 로그인 요청하기
       // POST /user/signin
@@ -45,16 +44,18 @@
         })
           .then((res) => {
             if (res.data.success) {
-              const userid = res.data.userid;
-              document.location.href = `/user/profile?userid=${userid}`;
+              const profileForm = document.forms["form_info"];
+              profileForm.userid.value = form.userid.value;
+              profileForm.submit();
             } else {
-              console.log("오류");
+              alert("로그인 실패");
             }
           })
           .catch((err) => {
             console.error(err);
           });
       }
+
     </script>
   </body>
 </html>

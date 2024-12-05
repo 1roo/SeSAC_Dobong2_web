@@ -8,9 +8,23 @@ router.get("/signup", controller.getSignup);
 router.post("/signup", controller.signup);
 router.get("/signin", controller.getSignin);
 router.post("/signin", controller.signin);
-router.get("/profile", controller.getProfile);
-router.post("/profile", controller.postProfile);
-// router.patch("/profile/edit", controller.editProfile);
-// router.delete("/profile/delete".controller.deleteUser);
+router.post("/profile", controller.getUserProfile);
+// router.patch("/profile/edit", controller.updateProfile);
+// router.delete("/profile/delete", controller.deleteUser);
+router.patch(
+  "/profile/edit",
+  (req, res, next) => {
+    next();
+  },
+  controller.updateProfile
+);
+
+router.delete(
+  "/profile/delete",
+  (req, res, next) => {
+    next();
+  },
+  controller.deleteUser
+);
 
 module.exports = router;

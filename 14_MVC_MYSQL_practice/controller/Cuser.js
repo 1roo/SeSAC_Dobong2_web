@@ -10,7 +10,6 @@ exports.getSignup = (req, res) => {
 };
 
 exports.signup = (req, res) => {
-  console.log("req.body", req.body);
   User.signup(req.body, (result) => {
     res.send({
       id: result,
@@ -26,7 +25,6 @@ exports.getSignin = (req, res) => {
 };
 
 exports.signin = (req, res) => {
-  console.log("signin req.body: ", req.body);
   User.signin(req.body, (err, result) => {
     if (err) res.send({ success: false });
     if (result.success) {
@@ -40,27 +38,41 @@ exports.signin = (req, res) => {
   });
 };
 
-exports.getProfile = (req, res) => {
-  const { userid } = req.params;
-
-  if (userid) {
-    User.getProfile({ userid }, (err, result) => {
-      if (err) {
-        console.error(err);
-      } else {
-        res.render("profile", { data: result });
-      }
-    });
-  }
-};
-
-exports.postProfile = (req, res) => {
-  console.log(req.body);
+exports.getUserProfile = (req, res) => {
   const { userid } = req.body;
-  User.getProfile({ userid }, (err, result) => {
+  User.getUserProfile(userid, (err, data) => {
     if (err) {
       console.error(err);
+      res.send({ success: false });
+    } else if (data) {
+      res.render("profile", {
+        success: true,
+        id: data.id,
+        userid: data.userid,
+        name: data.name,
+        pw: data.pw,
+      });
+    } else {
+      res.send({ success: false });
     }
-    res.render("profile", { data: result });
+  });
+};
+
+exports.updateProfile = (req, res) => {
+  User.updateProfile(req.body, (err, result) => {
+    if (err) {
+      console.error(err);
+      res.send({ success: false });
+    } else res.send({ success: true });
+  });
+};
+
+exports.deleteUser = (req, res) => {
+  const { userid } = req.body;
+  User.deleteUser(userid, (err, result) => {
+    if (err) {
+      console.error(err);
+      res.send({ success: false });
+    } else res.send({ success: true });
   });
 };
