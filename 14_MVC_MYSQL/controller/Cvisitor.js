@@ -19,7 +19,7 @@ exports.getVisitors = (req, res) => {
 };
 
 /* '/visitor/:id' GET */
-exports.getVisiitor = (req, res) => {
+exports.getVisitor = (req, res) => {
   const id = req.params.id;
   Visitor.getVisitor(id, (result) => {
     console.log("한개 Cvisitor.js", result);
