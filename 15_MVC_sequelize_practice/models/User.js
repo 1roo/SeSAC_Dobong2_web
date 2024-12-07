@@ -9,7 +9,7 @@ const User = function (Sequelize, DataTypes) {
         autoIncrement: true,
       },
       userid: {
-        type: DataTypes.String(20),
+        type: DataTypes.STRING(20),
         allowNull: false,
       },
       name: {
@@ -21,9 +21,7 @@ const User = function (Sequelize, DataTypes) {
         allowNull: false,
       },
     },
-    {
-      freezeTableName: true,
-    }
+    { timestamps: false, freezeTableName: true }
   ));
 };
 

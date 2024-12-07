@@ -21,9 +21,9 @@
       function register() {
         const form = document.forms["form_register"];
         if (
-          form.userid.value === 0 ||
-          form.pw.value === 0 ||
-          form.name.value === 0
+          !form.userid.value ||
+          !form.pw.value ||
+          !form.name.value
         ) {
           alert("모든 항목을 입력하세요");
           return;
@@ -38,7 +38,12 @@
           },
         })
           .then((res) => {
-            document.location.href = "/user/signin";
+            if (res.data.success) {
+              alert(res.data.message); 
+              document.location.href = "/user/signin";
+            } else {
+              alert("회원가입에 실패했습니다.");
+            }
           })
           .catch((err) => {
             console.error(err);

@@ -21,7 +21,7 @@
     </form>
 
     <!-- TODO: href 속성값 설정하기 -->
-    <a href="/user/signin">Register</a>
+    <a href="/user/signup">Register</a>
 
     
     <script>
@@ -29,7 +29,7 @@
       // POST /user/signin
       function login() {
         const form = document.forms["form_login"];
-        if (form.userid.value === 0 || form.pw.value === 0) {
+        if (!form.userid.value || !form.pw.value) {
           alert("모든 항목을 입력하세요");
           return;
         }

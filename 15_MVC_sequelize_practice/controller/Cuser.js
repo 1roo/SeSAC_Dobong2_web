@@ -11,13 +11,12 @@ exports.getSignup = (req, res) => {
 
 exports.signup = (req, res) => {
   models.User.create({
-    id: result,
     userid: req.body.userid,
     pw: req.body.pw,
     name: req.body.name,
   })
-    .then((result) => {
-      res.send(result);
+    .then(() => {
+      res.send({ success: true, message: "회원가입 성공" });
     })
     .catch((err) => {
       errorlogs(res, err);
@@ -52,7 +51,7 @@ exports.getUserProfile = async (req, res) => {
     const user = await models.User.findOne({
       where: { userid: userid },
     });
-    if (userr) {
+    if (user) {
       res.render("profile", {
         success: true,
         id: user.id,
@@ -80,9 +79,9 @@ exports.updateProfile = async (req, res) => {
       }
     );
     if (Boolean(result)) {
-      res.send("수정 완료");
+      res.send({ success: true, message: "수정 완료" });
     } else {
-      res.send("수정 실패");
+      res.send({ success: false, message: "수정 실패" });
     }
   } catch (err) {
     errorlogs(res, err);
@@ -95,9 +94,9 @@ exports.deleteUser = (req, res) => {
   })
     .then((result) => {
       if (Boolean(result)) {
-        res.send(req.body.userid + "삭제 완료");
+        res.send({ success: true, message: `${req.body.userid} 삭제 완료` });
       } else {
-        res.send("삭제 실패");
+        res.send({ success: false, message: "삭제 실패" });
       }
     })
     .catch((err) => {
