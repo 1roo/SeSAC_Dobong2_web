@@ -9,12 +9,19 @@ import {
 } from "./components/FunctionProps";
 import FunctionState from "./components/FunctionState";
 import SyntheticEvent from "./components/SyntheticEvent";
-import { ClassPrac, FunctionPrac } from "./practice/Practice";
+import PororoObj from "./components/practice/PororoObj";
+import {
+  HandlerEx,
+  ChangeColor,
+  Disappear,
+  ChangeEmoji,
+} from "./components/practice/EventPractice";
+import { ClassPrac, FunctionPrac } from "./components/practice/Practice";
 
 function App() {
   return (
     <div>
-      <h2>Props 사용</h2>
+      {/* <h2>Props 사용</h2> */}
       {/* <h3>클래스형 컴포넌트 props 사용해보기</h3>
       <ClassProps name="루피" color="pink" nickname="공주" />
       <ClassProps2
@@ -34,7 +41,7 @@ function App() {
       <FunctionProps4 name="딸기">
         <span style={{ color: "red" }}>children 요소입니다.</span>
       </FunctionProps4> */}
-      <h2>State</h2>
+      {/* <h2>State</h2>
       <h3>class형 state</h3>
       <ClassState />
       <h3>함수형 state</h3>
@@ -46,7 +53,14 @@ function App() {
 
       <h2>event</h2>
       <SyntheticEvent />
-      <Counter />
+      <Counter /> */}
+
+      <h2>Event Practice</h2>
+      <HandlerEx />
+      <ChangeColor />
+      <Disappear />
+      <ChangeEmoji />
+      <PororoObj />
     </div>
   );
 }
