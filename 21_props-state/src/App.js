@@ -17,8 +17,19 @@ import {
   ChangeEmoji,
 } from "./components/practice/EventPractice";
 import { ClassPrac, FunctionPrac } from "./components/practice/Practice";
+import EntirePractice from "./components/practice/EntirePractice";
+import PropsMap from "./components/PropsMap";
+import PropsMap2 from "./components/PropsMap2";
+import Alphabet from "./components/Alphabet";
+import MapPractice2 from "./components/practice/MapPractice2";
 
 function App() {
+  const arr = [
+    { name: "peach", krPrice: 10000, number: 5 },
+    { name: "strawberry", krPrice: 15000, number: 1 },
+    { name: "pear", krPrice: 5000, number: 3 },
+    { name: "apple", krPrice: 20000, number: 15 },
+  ];
   return (
     <div>
       {/* <h2>Props 사용</h2> */}
@@ -55,12 +66,20 @@ function App() {
       <SyntheticEvent />
       <Counter /> */}
 
-      <h2>Event Practice</h2>
+      {/* <h2>Event Practice</h2>
       <HandlerEx />
       <ChangeColor />
       <Disappear />
       <ChangeEmoji />
-      <PororoObj />
+      <PororoObj /> */}
+
+      <EntirePractice />
+      <h2>실습문제!!</h2>
+      <PropsMap arr={arr} />
+      <PropsMap2 arr={arr} />
+      <PropsMap2 />
+      <Alphabet />
+      <MapPractice2 />
     </div>
   );
 }
