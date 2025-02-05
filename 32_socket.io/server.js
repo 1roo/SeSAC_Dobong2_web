@@ -52,7 +52,7 @@ io.on("connection", (socket) => {
   // 나의 메세지가 나에게만 보임
   socket.on("new_message1", (arg, cb) => {
     console.log("[new_message1]::", arg);
-    cb(arg); // 나에게만 데이터 전달달
+    cb(arg); // 나에게만 데이터 전달
   });
 
   // 나의 메세지가 모두에게 보이도록
