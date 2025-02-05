@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>socket연습</title>
+    <!-- socket.io CDN -->
+    <script src="/socket.io/socket.io.js"></script>
+  </head>
+  <body>
+    <h1>hello world!</h1>
+    <button id="hello">hello</button>
+    <button id="study">study</button>
+    <button id="bye">bye</button>
+    <script>
+      const hello = document.querySelector("#hello");
+      const study = document.querySelector("#study");
+      const bye = document.querySelector("#bye");
+      const socket = io();
+
+      hello.addEventListener("click", () => {
+        socket.emit("prac_message", "hello");
+      });
+
+      study.addEventListener("click", () => {
+        socket.emit("prac_message", "study");
+      });
+
+      bye.addEventListener("click", () => {
+        socket.emit("prac_message", "bye");
+      });
+    </script>
+  </body>
+</html>
